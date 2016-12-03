@@ -2,7 +2,7 @@ README
 ================
 
 ##### Project Requirement
-
+```{r init, echo = TRUE}
 Here is the code I used to create the plots.
 household_power = read.table(paste0(path,"household_power_consumption.txt"),
                              header = TRUE, 
@@ -19,7 +19,7 @@ for(i in 3:9){
         household_power[,i] = as.numeric(household_power[,i])}
 width = 480
 height = 480
-
+```
 ##### Plot 1: Histogram for Global Active Power
 
 ``` r

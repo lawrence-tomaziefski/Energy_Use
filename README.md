@@ -4,50 +4,21 @@ README
 ##### Project Requirement
 
 Here is the code I used to create the plots.
+household_power = read.table(paste0(path,"household_power_consumption.txt"),
+                             header = TRUE, 
+                             na.strings = "NA", 
+                             sep = ";",
+                             dec = ".",
+                             stringsAsFactors = FALSE)
+household_power = mutate(household_power,
+                         datetime = dmy_hms(paste(household_power$Date,household_power$Time)))
+household_power = mutate(household_power,Date = dmy(household_power$Date))
+household_power = filter(household_power,Date == "2007-02-01" | Date == "2007-02-02")
 
-    ## Warning in dir.create("./energy_use"): './energy_use' already exists
-
-    ## Loading required package: dplyr
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-    ## Loading required package: data.table
-
-    ## -------------------------------------------------------------------------
-
-    ## data.table + dplyr code now lives in dtplyr.
-    ## Please library(dtplyr)!
-
-    ## -------------------------------------------------------------------------
-
-    ## 
-    ## Attaching package: 'data.table'
-
-    ## The following objects are masked from 'package:dplyr':
-    ## 
-    ##     between, last
-
-    ## Loading required package: lubridate
-
-    ## 
-    ## Attaching package: 'lubridate'
-
-    ## The following objects are masked from 'package:data.table':
-    ## 
-    ##     hour, mday, month, quarter, wday, week, yday, year
-
-    ## The following object is masked from 'package:base':
-    ## 
-    ##     date
+for(i in 3:9){
+        household_power[,i] = as.numeric(household_power[,i])}
+width = 480
+height = 480
 
 ##### Plot 1: Histogram for Global Active Power
 
@@ -58,15 +29,11 @@ hist(household_power$Global_active_power,
      xlab = "Global Active Power (kilowatts)",
      ylim = c(0,1200))
 ```
-
-![](README_files/figure-markdown_github/plot1-1.png) \#\#\#\#\#Save plot as a .png
-
-    ## quartz_off_screen 
-    ##                 3
-
-    ## quartz_off_screen 
-    ##                 2
-
+#####Save plot as a .png
+```{r plot12, echo = FALSE}
+dev.copy(png, file = "plot1.png",width = width, height = height)
+## Don't forget to close the PNG device!
+dev.off()
 ##### Plot 2: Global Active Power Line Graph
 
 ``` r

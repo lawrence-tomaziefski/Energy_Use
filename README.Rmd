@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 #####Project Requirement
 Here is the code I used to create the plots. 
-```{r plot1, echo = FALSE}
+```{r init, echo = FALSE}
 #Set working directory and folder to store data
 setwd('/Users/lawrence_tomaziefski/R_Working_Directory/161130_Exploratory_Data_Analysis')
 dir.create("./energy_use")
@@ -36,7 +36,7 @@ height = 480
 ```
 
 #####Plot 1: Histogram for Global Active Power
-```{r plot11, echo=TRUE}
+```{r plot1, echo=TRUE}
 hist(household_power$Global_active_power,
      col = "red", 
      main = "Global Active Power",
@@ -53,7 +53,6 @@ dev.off()
 ```{r plot2, echo=TRUE}
 with(household_power,plot(datetime,Global_active_power, type = "l",
                                 ylab = "Global Active Power (kilowatts)"))
-dev.copy(png, file = "plot2.png",width = width, height = height)
 ```
 ####Plot 3: Sub_metering Line Graph
 ```{r plot3, echo=TRUE}
